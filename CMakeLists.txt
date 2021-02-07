@@ -1,6 +1,15 @@
 cmake_minimum_required(VERSION 3.17.3)
 project(Catainer)
 
+set(CATAINER_LIBRARY_NAME ${CMAKE_PROJECT_NAME})
+set(CATAINER_LIBRARY_NAMESPACE ${CMAKE_PROJECT_NAME})
+
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(Catainer src/main.cpp)
+add_library(${CATAINER_LIBRARY_NAME} INTERFACE)
+target_include_directories(${CATAINER_LIBRARY_NAME} INTERFACE public)
+# target_include_directories(${CATAINER_LIBRARY_NAME} PRIVATE private)
+
+add_library(${CATAINER_LIBRARY_NAMESPACE}::${CATAINER_LIBRARY_NAME} ALIAS ${CATAINER_LIBRARY_NAME})
+
+add_subdirectory(tests)
